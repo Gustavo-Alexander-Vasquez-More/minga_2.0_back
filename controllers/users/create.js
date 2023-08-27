@@ -4,8 +4,12 @@ export default async(req, res)=>{
     try {
         const creator= await User.create(req.body)
         if (creator){
+            
             res.status(200).json({
-                response:creator,
+                response:{
+                    email:creator.email,
+                    photo:creator.photo
+                },
                 message:'User Created',
         });
     }else{
