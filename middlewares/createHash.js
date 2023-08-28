@@ -1,12 +1,6 @@
-import bcryptjs from "bcryptjs"
+import bcrypt from 'bcrypt'
 
-export default (req,res,next)=> {
-    let password = req.body.password
-    console.log(req.body);
-    console.log(req.files);
-    console.log(req.file);
-    let hash = bcryptjs.hashSync(password, 15)
-    req.body.password = hash;
-
-    next();
+export default (req, res, next) => {
+    req.body.password = bcrypt.hashSync(req.body.password, 10)
+    return next()
 }

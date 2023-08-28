@@ -10,10 +10,12 @@ import generateToken from '../middlewares/generateToken.js'
 import passport from "../middlewares/passport.js";
 import signout from "../controllers/users/signOut.js";
 import Hash from '../middlewares/createHash.js'
+import acountNotExist from "../middlewares/acountNotExist.js";
+import acountExist from "../middlewares/acountExist.js";
 const user_router=Router()
 
 user_router.get('/', read)
-user_router.post('/register',validator(register) , Hash ,creator)
-user_router.post('/SignIn',validator(userSigIn), passwordIsOk, generateToken, SignIn)
+user_router.post('/register',validator(register),acountExist , Hash ,creator)
+user_router.post('/SignIn', validator(userSigIn), acountNotExist , passwordIsOk, generateToken, SignIn)
 user_router.post('/LogOut', passport.authenticate('jwt', { session:false }),signout)
 export default user_router
