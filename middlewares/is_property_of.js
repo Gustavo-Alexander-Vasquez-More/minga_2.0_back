@@ -21,10 +21,12 @@ export default async (req, res, next) => {
                 message: 'You are not author of this manga'
             });
         }
+        
     } catch (err) {
         console.error(err);
         return res.status(500).json({
             message: 'Internal server error'
         });
     }
+   
 };
