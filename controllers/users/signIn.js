@@ -14,6 +14,7 @@ export default async(req,res,next)=> {
             response: {
                 user: one.email,
                 photo: one.photo,
+                role:one.role,
                 token: req.token
             }
         })
