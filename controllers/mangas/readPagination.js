@@ -3,8 +3,8 @@ import Manga from '../../models/Manga.js'
 export default async(req, res)=>{
     try {
         let pagination = { page: 1, limit: 8 };
-        if (req.body.page) {
-          pagination.page = req.body.page;
+        if (req.query.page) {
+          pagination.page = req.query.page;
         }
         if (req.body.limit) {
           pagination.limit = req.body.limit;
@@ -30,11 +30,11 @@ export default async(req, res)=>{
         
         return res.status(200).json({
           success: true,
-          response: {
-            mangas:read_mangas,
+          response: read_mangas,
+          prev: pagination.page > 1 ? pagination.page - 1 : null,
             next: nextPage,
           currentPage: currentPage
-          }
+          
         });
       } catch (error) {
         console.log(error);
